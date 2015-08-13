@@ -22,3 +22,9 @@ def power_digit_sum(number)
 
   sum
 end
+
+#better version
+
+def power_digit_sum_2(number)
+  number.to_s.split('').map {|digit| digit.to_i}.reduce(:+)
+end
