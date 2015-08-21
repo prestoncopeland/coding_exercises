@@ -15,3 +15,9 @@ Answer: 9110846700 (found myself)
 def self_powers
   (1..1000).map {|i| i**i}.reduce(:+).to_s.slice(-10,10).to_i
 end
+
+#this is a slightly more clever variant after pondering for a bit
+
+def self_powers_2
+  (1..1000).map {|i| i**i}.reduce(:+) % (10**10)
+end
