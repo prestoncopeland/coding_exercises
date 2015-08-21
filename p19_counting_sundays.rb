@@ -20,6 +20,11 @@ How many Sundays fell on the first of the month during the twentieth century (1 
 
 =end
 
+(1..31)
+months_no_leap = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+months_leap = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+day = [1, 2, 3, 4, 5, 6, 7]
+
 
 def position_in_month?(possible_date, position_in_month)
 
