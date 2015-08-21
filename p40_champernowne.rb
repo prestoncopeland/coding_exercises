@@ -15,6 +15,8 @@ If dn represents the nth digit of the fractional part, find the value of the fol
 
 d1 × d10 × d100 × d1000 × d10000 × d100000 × d1000000
 
+Answer: 210 (solved myself)
+
 =end
 
 def champernowne
