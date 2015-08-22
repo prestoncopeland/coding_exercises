@@ -20,29 +20,15 @@ How many Sundays fell on the first of the month during the twentieth century (1 
 
 =end
 
-(1..31)
 months_no_leap = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 months_leap = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 day = [1, 2, 3, 4, 5, 6, 7]
 
-
-def position_in_month?(possible_date, position_in_month)
-
+def leap_year?(year)
+  (year%400 == 0) || (year%4 == 0 && year%100 != 0)
 end
 
-def days_in_time_period(day, position_in_month, start_date, end_date)
-
-  count = 0
-  (start_date..end_date).each do |possible_date|
-
-    if(position_in_month?(possible_date, position_in_month) && day_matches_date?(possible_date, day))
-
-      count += 1
-    end
-
-  end
-
-  count
+(1901..2000).each do |year|
 
 end
 
