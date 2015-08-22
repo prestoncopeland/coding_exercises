@@ -47,5 +47,21 @@ def sum_double_palindromes
   sum
 end
 
+=begin
+Here's a much more elegant solution I found in the solution forum. It takes advantage of some of Ruby's built-in functions.
+=end
+
+def double_palindromes
+  answer=0
+  for i in 1..999999
+    if i.to_s == i.to_s.reverse
+      x = i.to_s(2)
+      if x == x.reverse
+        answer = answer + i.to_i
+      end
+    end
+  end
+  answer
+end
 
 
