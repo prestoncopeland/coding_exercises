@@ -31,7 +31,7 @@ def truncatable_left?(number)
   if(number/10 == 0)
     Prime.prime?(number)
   else
-    Prime.prime?(number) && truncatable_left?(drop("front", number))
+    Prime.prime?(number) && truncatable_left?(drop_front(number))
   end
 end
 
@@ -39,7 +39,7 @@ def truncatable_right?(number)
   if(number/10 == 0)
     Prime.prime?(number)
   else
-    Prime.prime?(number) && truncatable_right?(drop("last", number))
+    Prime.prime?(number) && truncatable_right?(drop_last(number))
   end
 end
 
