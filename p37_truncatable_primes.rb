@@ -11,7 +11,7 @@ Find the sum of the only eleven primes that are both truncatable from left to ri
 
 NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
 
-Answer: 748317 (found myself)
+Answer: 748317 (found myself, took me from ~7:30-10:00 a.m., refactoring took another hour)
 =end
 
 require 'Prime'
