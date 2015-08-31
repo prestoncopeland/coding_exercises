@@ -10,6 +10,9 @@ A googol (10100) is a massive number: one followed by one-hundred zeros; 100100 
 Considering natural numbers of the form, ab, where a, b < 100, what is the maximum digital sum?
 
 Answer: 972 (found myself)
+
+Note: I know, I could have used two for loops (i.e., (1...100).each do ), but I wanted to use map. I was feeling functional.
+
 =end
 
 def digit_sum number
@@ -21,3 +24,22 @@ def max_digit_sum
   arr_2 = Array.new(100) {|index| index + 1}
   arr_1.product(arr_2).map {|elem| elem[0] ** elem[1]}.map {|num| digit_sum(num)}.max
 end
+
+=begin
+Here's one that I found in the solutions forum that strikes me as more elegant
+
+max = 0
+2.upto(100) do |a|
+  2.upto(100) do |b|
+    c = a ** b
+    d = c.to_s.split(//)
+    sum = 0
+    d.each do |i|
+      sum += i.to_i
+    end
+    max = sum if max < sum
+  end
+end
+puts max
+
+=end
