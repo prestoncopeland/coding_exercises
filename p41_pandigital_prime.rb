@@ -11,6 +11,38 @@ What is the largest n-digit pandigital prime that exists?
 
 Answer: 7652413 (solved myself)
 ----------
+Third, final version. Realized that I could avoid
+the need for a flag to check for pandigitality
+if I initialized the pandigital array more
+efficiently to start. This halved the LOC.
+Real runtime after rehearsal: 0.16 seconds
+
+=end
+
+require 'prime'
+require 'benchmark'
+
+def largest_pandigital_prime
+  7.downto(2) do |i|
+    pandigital = []
+    (1..i).each do |digit|
+      pandigital << digit
+    end
+    p = pandigital.permutation(i).to_a
+    p = p.map {|arr| arr.join.to_i}
+    p = p.keep_if {|v| Prime.prime?(v)}.sort
+    return p.max if(p != [])
+  end
+end
+
+Benchmark.bmbm do |benchmark|
+  benchmark.report('largest pandigital prime') do
+    largest_pandigital_prime
+  end
+end
+
+=begin
+--------
 First version:
 Real runtime after rehearsal: 34 seconds
 
@@ -72,34 +104,7 @@ def largest_pandigital_prime
   end
 end
 
-
-----------
-Third, final version. Realized that I could avoid the need for a flag to check for pandigitality if I initialized the pandigital array more efficiently to start. This halved the LOC.
-Real runtime after rehearsal: 0.16 seconds
-
 =end
-
-require 'prime'
-require 'benchmark'
-
-def largest_pandigital_prime
-  7.downto(2) do |i|
-    pandigital = []
-    (1..i).each do |digit|
-      pandigital << digit
-    end
-    p = pandigital.permutation(i).to_a
-    p = p.map {|arr| arr.join.to_i}
-    p = p.keep_if {|v| Prime.prime?(v)}.sort
-    return p.max if(p != [])
-  end
-end
-
-Benchmark.bmbm do |benchmark|
-  benchmark.report('largest pandigital prime') do
-    largest_pandigital_prime
-  end
-end
 
 
 
