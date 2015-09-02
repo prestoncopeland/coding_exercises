@@ -10,15 +10,47 @@ We shall say that an n-digit number is pandigital if it makes use of all the dig
 What is the largest n-digit pandigital prime that exists?
 
 Answer: 7652413 (solved myself)
-Real runtime after rehearsal: 34 seconds
 
-=end
-require 'prime'
-require 'benchmark'
+First version:
+Real runtime after rehearsal: 34 seconds
 
 def largest_pandigital_prime
   pandigital = [1,2,3,4,5,6,7,8,9]
   9.downto(2) do |i|
+    p = pandigital.permutation(i).to_a
+    p = p.map {|arr| arr.join.to_i}
+    p = p.keep_if {|v| Prime.prime?(v)}
+    if(p != [])
+      p = p.keep_if do |prime|
+        pandigital_flag = true
+        prime_array = prime.to_s.split('')
+        (1..i).each do |digit|
+          if(!prime_array.include?(digit.to_s))
+            pandigital_flag = false
+          end
+        end
+        pandigital_flag
+      end
+    end
+    if(p != [])
+      return p.max
+    end
+  end
+end
+
+
+Second, optimized version: Using optimization that 8-digit and 9-digit numbers can't be done using elementary division theory (adding all 9 digits gives 45, which means a 9-digit number would be divisible by 3; similar reasoning gives 36 and 3-divisibility for all 8-digit numbers fitting the criteria). So, we start with 7-digit numbers. I gleaned this insight from the solution board for problem 41.
+
+Real runtime after rehearsal: 0.18 seconds (!!!!!!!)
+
+=end
+
+require 'prime'
+require 'benchmark'
+
+def largest_pandigital_prime
+  pandigital = [1,2,3,4,5,6,7]
+  7.downto(2) do |i|
     p = pandigital.permutation(i).to_a
     p = p.map {|arr| arr.join.to_i}
     p = p.keep_if {|v| Prime.prime?(v)}
@@ -45,5 +77,6 @@ Benchmark.bmbm do |benchmark|
     largest_pandigital_prime
   end
 end
+
 
 
