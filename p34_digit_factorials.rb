@@ -16,14 +16,15 @@ are not included.
 
 Answer: 40730 (found myself)
 58307th person to solve it
+Runs in about 8 seconds.
 =end
 
 def factorial n
-  if( n==1 || n==0 ) then 1 else n * factorial(n-1) end
+  (1..(n.zero? ? 1 : n)).inject(:*)
 end
 
 def sum_digit_factorials n
-  n.to_s.split('').map {|v| v.to_i}.map {|w| factorial(w)}.inject(:+)
+  n.to_s.chars.map(&:to_i).map{|w| factorial(w)}.inject(:+)
 end
 
 def digit_factorial
@@ -35,5 +36,24 @@ def digit_factorial
   end
   sum
 end
+
+=begin
+First version of
+
+def sum_digit_factorials n
+  n.to_s.split('').map {|v| v.to_i}.map {|w| factorial(w)}.inject(:+)
+end
+
+Then I googled around and found a cleaner way
+to do the first part.
+
+First version of
+
+def factorial n
+  if( n==1 || n==0 ) then 1 else n * factorial(n-1) end
+end
+
+Then googled around, discovered there is in fact no factorial function in Ruby standard library (weird), and found the cleaner version above.
+=end
 
 
