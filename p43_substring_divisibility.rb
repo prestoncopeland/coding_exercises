@@ -5,9 +5,13 @@ Project Euler
 
 Problem 43: Substring Divisibility
 
-The number, 1406357289, is a 0 to 9 pandigital number because it is made up of each of the digits 0 to 9 in some order, but it also has a rather interesting sub-string divisibility property.
+The number, 1406357289, is a 0 to 9 pandigital
+number because it is made up of each of the
+digits 0 to 9 in some order, but it also
+has a rather interesting sub-string divisibility property.
 
-Let d1 be the 1st digit, d2 be the 2nd digit, and so on. In this way, we note the following:
+Let d1 be the 1st digit, d2 be the 2nd digit,
+and so on. In this way, we note the following:
 
     d2d3d4=406 is divisible by 2
     d3d4d5=063 is divisible by 3
@@ -17,8 +21,15 @@ Let d1 be the 1st digit, d2 be the 2nd digit, and so on. In this way, we note th
     d7d8d9=728 is divisible by 13
     d8d9d10=289 is divisible by 17
 
-Find the sum of all 0 to 9 pandigital numbers with this property.
+Find the sum of all 0 to 9 pandigital numbers
+with this property.
+
+Answer: 16695334890 (solved myself)
+Became 35,958th person to do so.
+Real runtime after rehearsal: 10.8 s
 =end
+
+require 'benchmark'
 
 def slice_divisible? number, position, divisor
   (number.slice(position-1,3).join.to_i)%divisor == 0
@@ -26,11 +37,18 @@ end
 
 def substr_div
   pan = (0..9).to_a.permutation(10).to_a
-  arr = [0,0,2,3,5,7,11,13,17]
+  divisors = [0,0,2,3,5,7,11,13,17]
 
-  arr.each_with_index do |a, i|
-    next if(i<2)
-    pan.reject! {|v| !slice_divisible?(v,i,a)}
+  8.downto(2) do |position|
+    pan.keep_if {|v| slice_divisible?(v,position,divisors[position])}
   end
+
   pan.map {|v| v.join.to_i}.inject(:+)
 end
+
+Benchmark.bmbm do |benchmark|
+  benchmark.report('substring divisibility') do
+    substr_div
+  end
+end
+
