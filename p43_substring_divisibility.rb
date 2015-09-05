@@ -26,7 +26,7 @@ with this property.
 
 Answer: 16695334890 (solved myself)
 Became 35,958th person to do so.
-Real runtime after rehearsal: 10.8 s
+Real runtime after rehearsal: 10.6 s
 =end
 
 require 'benchmark'
