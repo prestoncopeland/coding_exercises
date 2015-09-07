@@ -20,9 +20,9 @@ The next three expansions are 99/70, 239/169, and 577/408, but the eighth expans
 
 In the first one-thousand expansions, how many fractions contain a numerator with more digits than denominator?
 
-Answer: 153 ???
+Answer: 153 (solved myself)
 =end
-require 'fraction'
+
 
 def sqrt_expansion iteration
   iteration -= 1
