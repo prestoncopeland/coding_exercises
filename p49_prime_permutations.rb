@@ -1,6 +1,7 @@
 =begin
 Preston Copeland
 August 26, 2015
+Restarted September 8, 2015
 Project Euler
 
 Problem 49: Prime Permutations
@@ -16,12 +17,10 @@ What 12-digit number do you form by concatenating the three terms in this sequen
 3. If it fits the rules, stop the traversal and output the three numbers concatenated.
 
 =end
+require 'prime'
 
 def prime_permutations
-  a = [0,1,2,3,4,5,6,7,8,9]
-  a = a.permutation(4).to_a.map {|v| v.join.to_i}
-  a = a.delete_if {|v| v.to_s.size < 4 }
-
-
-
+  a = (0..9).to_a.permutation(4).to_a.map {|v| v.join.to_i}
+  a = a.delete_if {|v| v.to_s.size != 4}
+  a = a.delete_if {|v| !Prime.prime?(v)}
 end
