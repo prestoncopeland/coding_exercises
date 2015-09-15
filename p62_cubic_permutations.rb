@@ -1,6 +1,7 @@
 =begin
 Preston Copeland
 September 1, 2015
+Retackled on September 14, 2015
 Project Euler
 
 Problem 62: Cubic Permutations
@@ -11,13 +12,22 @@ Find the smallest cube for which exactly five permutations of its digits are cub
 
 =end
 
+def cube? number
+  epsilon = 1e-6
+  ((number**(1/3.0) - (number**(1/3.0)).ceil)).abs < epsilon
+end
+
 def cubic_permutations
-  i = 2
+  i = 200
   while true
     cube = i**3
-    cube_permutations = cube.to_s.split('').map {|n| n.to_i}.permutation.to_a.map {|v| v.join.to_i}
-    break if( cube_permutations.keep_if {|n| n**(1/3.0) == (n**(1/3.0)).to_i  }.size == 5)
+    permutations = cube.to_s.split("").map {|v| v.to_i}.permutation.to_a.select {|v| cube?(v.join.to_i)}
+    unless permutations.nil?
+      permutations.uniq!
+      unless permutations.nil?
+        return cube if(permutations.size == 5)
+      end
+    end
     i += 1
   end
-  i
 end
