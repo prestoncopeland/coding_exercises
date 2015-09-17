@@ -2,6 +2,7 @@
 Preston Copeland
 September 1, 2015
 Retackled on September 14, 2015
+Retackled on September 17, 2015
 Project Euler
 
 Problem 62: Cubic Permutations
@@ -11,6 +12,10 @@ The cube, 41063625 (3453), can be permuted to produce two other cubes: 56623104 
 Find the smallest cube for which exactly five permutations of its digits are cube.
 
 =end
+def int? number
+  epsilon = 1e-6
+  (number - number.ceil).abs < epsilon
+end
 
 def cube? number
   epsilon = 1e-6
