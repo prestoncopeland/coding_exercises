@@ -23,14 +23,18 @@ def cube? number
 end
 
 def cubic_permutations
-  i = 200
-  while true
+  i = 300
+  while i < 1000
     cube = i**3
-    permutations = cube.to_s.split("").map {|v| v.to_i}.permutation.to_a.select {|v| cube?(v.join.to_i)}
+    permutations = cube.to_s.split("").map {|v| v.to_i}.permutation.to_a.select {|v| cube?(v.join.to_i) }
     unless permutations.nil?
       permutations.uniq!
+      permutations = permutations.map {|v| v.join.to_i}
       unless permutations.nil?
-        return cube if(permutations.size == 5)
+        same_size = permutations.all? {|v| v.to_s.size == permutations[0].to_s.size}
+        if(permutations.size == 5 && same_size)
+          return cube
+        end
       end
     end
     i += 1

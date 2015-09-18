@@ -1,6 +1,8 @@
 =begin
 Preston Copeland
 September 4, 2015
+Retackled 9/18/15
+
 Project Euler
 
 Problem 46: Goldbach's Other Conjecture
@@ -18,33 +20,24 @@ It turns out that the conjecture was false.
 
 What is the smallest odd composite that cannot be written as the sum of a prime and twice a square?
 
-Algorithm
-1. Iterate over all odd numbers
-1b. If result is prime, next.
-2. Subtract all prime numbers less than the number
-3. If result is odd, continue.
-4. If result is even, divide by 2.
-5. Check if result is a perfect square.
-6. If it is, next guess.
-7. If it isn't and we're out of primes, return the number.
+Solved: 5777 (solved after Googling for help with an algorithm)
+You are the 37093rd person to have solved this problem.
 =end
 require 'prime'
 
-def goldbach_other_conjecture
-  conjecture = 3
-  while true
-
-    if(Prime.prime?(conjecture))
-      conjecture += 2
-      next
+def goldbach
+  primes = Prime.first 1000
+  doubled_squares = (1..1000).map {|v| 2*(v**2)}
+  odds = Array.new(10000, false)
+  odds = odds.each_with_index.map {|v,i| v = true if( (i%2==0) || (Prime.prime?(i)) || i==1)}
+  primes.each do |prime|
+    doubled_squares.each do |d_square|
+      num = prime + d_square
+      odds[num] = true
     end
-
-    Prime.each(ubound=conjecture) do |prime|
-
-    end
-
-    conjecture +=2
   end
+
+  odds.index(odds.find {|v| v==false})
 end
 
 
